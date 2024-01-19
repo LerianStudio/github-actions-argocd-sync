@@ -1,0 +1,29 @@
+name: GitHub actions kustomize argocd manifests
+author: Gabriel Ferreira
+description: GitHub action used sync ArgoCD apps
+branding:
+  icon: feather
+  color: gray-dark
+
+inputs:
+  app-name:
+    description: 'The App name'
+    required: true
+  argo-cd-token:
+    description: 'The ArgoCD token to authenticate'
+    required: true
+  argo-cd-url:
+    description: 'The ArgoCD URL'
+    required: true
+  env-prefix:
+    description: 'The app env prefix in argocd app name (dev|prd)'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.app-name }}
+    - ${{ inputs.argo-cd-token }}
+    - ${{ inputs.argo-cd-url }}
+    - ${{ inputs.env-prefix }}

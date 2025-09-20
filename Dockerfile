@@ -2,7 +2,7 @@
 FROM public.ecr.aws/docker/library/alpine:latest
 
 # set argocd version
-ENV ARGO_VERSION="v2.4.9"
+ENV ARGO_VERSION="v3.0.6"
 
 # Installl dependencies
 RUN apk add bash git curl gzip --update --no-cache bash

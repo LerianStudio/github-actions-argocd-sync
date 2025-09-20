@@ -30,10 +30,7 @@ echo -e "\033[0;32mSyncing application... ✓\033[0m"
 
 echo -e "\033[0;36m======> WAIT SYNC $APP_TO_SYNC \033[0m\n"
 echo -e "\033[0;33mExecuting: argocd app wait \"$APP_TO_SYNC\" --server \"$ARGO_CD_URL\" --auth-token \"***\" --grpc-web\033[0m"
-argocd app wait "$APP_TO_SYNC" --server "$ARGO_CD_URL" --auth-token "$ARGO_CD_TOKEN" --grpc-web > /dev/null 2>&1 &
-show_loading "Waiting for sync completion..."
-wait $!
-if [ $? -ne 0 ]; then
+if ! argocd app wait "$APP_TO_SYNC" --server "$ARGO_CD_URL" --auth-token "$ARGO_CD_TOKEN" --grpc-web > /dev/null 2>&1; then
     echo -e "\033[0;31mERROR: Failed to wait for sync completion of app $APP_TO_SYNC\033[0m"
     exit 1
 fi
